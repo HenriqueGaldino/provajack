@@ -1,0 +1,48 @@
+CREATE DATABASE evento;
+USE evento;
+CREATE TABLE Notificacao (
+    idNotificacao INT UNSIGNED NOT NULL AUTO_INCREMENT,
+    idemail VARCHAR(100) NOT NULL,
+    idtelefone varchar (100) not null,
+    PRIMARY KEY (idNotificacao)
+);
+
+
+
+CREATE TABLE Organizador (
+    idOrganizador INT UNSIGNED NOT NULL AUTO_INCREMENT,
+    nomeOrganizador varchar(100) not null,
+    emailOrganizador VARCHAR(100) NOT NULL,
+    telefoneOrganizador varchar(100) not null,
+    PRIMARY KEY (idOrganizador)
+);
+
+CREATE TABLE Local (
+    idLocal INT UNSIGNED NOT NULL AUTO_INCREMENT,
+    nomeLocal varchar(255) NOT NULL,
+    descricaoLocal VARCHAR(255) NOT NULL,
+    vagas INT NOT NULL,
+    PRIMARY KEY (idLocal)
+);
+
+CREATE TABLE Evento (
+    idEvento INT UNSIGNED NOT NULL AUTO_INCREMENT,
+    idOrganizador INT UNSIGNED NOT NULL,
+    idLocal INT UNSIGNED NOT NULL,
+    dataEvento DATETIME NOT NULL,
+    nomeEvento varchar (255) not null,
+    descricaoEvento varchar(255) NOT NULL,
+    PRIMARY KEY (idEvento),
+    FOREIGN KEY (idOrganizador) REFERENCES Organizador (idOrganizador),
+    FOREIGN KEY (idLocal) REFERENCES Local (idLocal)
+);
+
+CREATE TABLE Participante (
+    idParticipante INT UNSIGNED NOT NULL AUTO_INCREMENT,
+    idEvento INT UNSIGNED NOT NULL,
+    nomeParticipante VARCHAR(60) NOT NULL,
+    emailParticipante VARCHAR(100) NOT NULL,
+    telefoneParticipante varchar (100) not null,
+    PRIMARY KEY (idParticipante),
+    FOREIGN KEY (idEvento) REFERENCES Evento (idEvento)
+);
