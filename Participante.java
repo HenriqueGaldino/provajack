@@ -7,11 +7,11 @@ import java.sql.Statement;
 public class Participante {
     int idParticipante;
     String nomeParticipante;
-    int telefoneParticipante;
+    String telefoneParticipante;
     String emailParticipante;
     int idEvento;
 
-    public Participante(int idParticipante, String nomeParticipante, int telefoneParticipante, String emailParticipante, int idEvento) {
+    public Participante(int idParticipante, String nomeParticipante, String telefoneParticipante, String emailParticipante, int idEvento) {
         this.idParticipante = idParticipante;
         this.nomeParticipante = nomeParticipante;
         this.telefoneParticipante = telefoneParticipante;
@@ -43,7 +43,7 @@ public class Participante {
                 participante = new Participante(
                     rs.getInt("idParticipante"),
                     rs.getString("nomeParticipante"),
-                    rs.getInt("telefoneParticipante"),
+                    rs.getString("telefoneParticipante"),
                     rs.getString("emailParticipante"),
                     rs.getInt("idEvento")
                 );

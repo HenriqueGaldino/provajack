@@ -41,7 +41,7 @@ public class Notificacao {
             String resposta = scanner.nextLine();
     
             if (resposta.equalsIgnoreCase("s")) {
-                // Aqui você pode adicionar lógica para enviar notificações.
+
                 System.out.println("Notificações enviadas com sucesso!");
             } else {
                 System.out.println("Operação cancelada.");

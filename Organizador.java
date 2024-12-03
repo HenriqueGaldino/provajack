@@ -8,9 +8,9 @@ public class Organizador {
     int idOrganizador;
     String nomeOrganizador;
     String emailOrganizador;
-    int telefoneOrganizador;
+    String telefoneOrganizador;
 
-    public Organizador(int idOrganizador, String nomeOrganizador, String emailOrganizador, int telefoneOrganizador) {
+    public Organizador(int idOrganizador, String nomeOrganizador, String emailOrganizador, String telefoneOrganizador) {
         this.idOrganizador = idOrganizador;
         this.nomeOrganizador = nomeOrganizador;
         this.emailOrganizador = emailOrganizador;
@@ -42,7 +42,7 @@ public class Organizador {
                         rs.getInt("idOrganizador"),
                         rs.getString("nomeOrganizador"),
                         rs.getString("emailOrganizador"),
-                        rs.getInt("telefoneOrganizador")
+                        rs.getString("telefoneOrganizador")
                     );
                     System.out.println(organizador);
                 } else {

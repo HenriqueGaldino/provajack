@@ -1,6 +1,4 @@
-import java.lang.Thread.State;
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -44,7 +42,7 @@ public class Sistema{
                         System.out.println("Digite o email do organizador: ");
                         String emailOrganizador = scanner.next();
                         System.out.println("Digite o telefone do organizador: ");
-                        int telefoneOrganizador = scanner.nextInt();
+                        String telefoneOrganizador = scanner.next();
 
                         Connection con = DriverManager.getConnection(url, user, password);
                         PreparedStatement stm = con.prepareStatement("INSERT INTO Organizador "
@@ -52,7 +50,7 @@ public class Sistema{
                         + "(?,?,?)", PreparedStatement.RETURN_GENERATED_KEYS);
                         stm.setString(1, nomeOrganizador);
                         stm.setString(2, emailOrganizador);
-                        stm.setInt(3, telefoneOrganizador);
+                        stm.setString(3, telefoneOrganizador);
                         if (stm.executeUpdate() > 0) {
                             ResultSet rs = stm.getGeneratedKeys();
 
@@ -145,7 +143,7 @@ public class Sistema{
                     System.out.println("Digite o nome do participante: ");
                     String nomeParticipante = scanner.next();
                     System.out.println("Digite o telefone do participante: ");
-                    int telefoneParticipante = scanner.nextInt();
+                    String telefoneParticipante = scanner.next();
                     System.out.println("Digite o email do participante: ");
                     String emailParticipante = scanner.next();
                     System.out.println("Digite o id do evento: ");
@@ -156,7 +154,7 @@ public class Sistema{
                     + "(nomeParticipante, telefoneParticipante, emailParticipante, idEvento) VALUES "
                     + "(?,?,?,?)", PreparedStatement.RETURN_GENERATED_KEYS);
                     stm.setString(1, nomeParticipante);
-                    stm.setInt(2, telefoneParticipante);
+                    stm.setString(2, telefoneParticipante);
                     stm.setString(3, emailParticipante);
                     stm.setInt(4, idEvento);
                     if (stm.executeUpdate() > 0) {
@@ -182,7 +180,7 @@ public class Sistema{
                         System.out.println("ID: " + rs.getInt("idOrganizador"));
                         System.out.println("Nome: " + rs.getString("nomeOrganizador"));
                         System.out.println("Email: " + rs.getString("emailOrganizador"));
-                        System.out.println("Telefone: " + rs.getInt("telefoneOrganizador"));
+                        System.out.println("Telefone: " + rs.getString("telefoneOrganizador"));
                         System.out.println("===================================");
                     }
                     con.close();
@@ -237,7 +235,7 @@ public class Sistema{
                     while (rs.next()) {
                         System.out.println("ID: " + rs.getInt("idParticipante"));
                         System.out.println("Nome: " + rs.getString("nomeParticipante"));
-                        System.out.println("Telefone: " + rs.getInt("telefoneParticipante"));
+                        System.out.println("Telefone: " + rs.getString("telefoneParticipante"));
                         System.out.println("Email: " + rs.getString("emailParticipante"));
                         System.out.println("ID Evento: " + rs.getInt("idEvento"));
                         System.out.println("===================================");
