@@ -15,10 +15,10 @@ public class Notificacao {
     public void buscarEExibirOpcoes(String nomeBusca, Scanner scanner) {
         try (Connection con = DriverManager.getConnection(url, user, password)) {
             PreparedStatement stm = con.prepareStatement(
-                "SELECT emailOrganizador AS email, nomeOrganizador AS nome " +
+                "SELECT emailOrganizador AS email, telefoneOrganizador AS telefone, nomeOrganizador AS nome " +
                 "FROM Organizador WHERE nomeOrganizador LIKE ? " +
                 "UNION " +
-                "SELECT emailParticipante AS email, nomeParticipante AS nome " +
+                "SELECT emailParticipante AS email, telefoneParticipante AS telefone, nomeParticipante AS nome " +
                 "FROM Participante WHERE nomeParticipante LIKE ?");
             
             stm.setString(1, "%" + nomeBusca + "%");
@@ -34,6 +34,7 @@ public class Notificacao {
             while (rs.next()) {
                 System.out.println("Nome: " + rs.getString("nome"));
                 System.out.println("Email: " + rs.getString("email"));
+                System.out.println("Telefone: " + rs.getString("telefone"));
                 System.out.println("----------------------------------");
             }
     
@@ -41,8 +42,17 @@ public class Notificacao {
             String resposta = scanner.nextLine();
     
             if (resposta.equalsIgnoreCase("s")) {
-
-                System.out.println("Notificações enviadas com sucesso!");
+                System.out.print("Escolha o tipo de notificação (1 - Email, 2 - Telefone): ");
+                int tipoNotificacao = scanner.nextInt();
+                scanner.nextLine();
+    
+                if (tipoNotificacao == 1) {
+                    System.out.println("Notificações por email enviadas com sucesso!");
+                } else if (tipoNotificacao == 2) {
+                    System.out.println("Notificações por telefone enviadas com sucesso!");
+                } else {
+                    System.out.println("Tipo de notificação inválido. Operação cancelada.");
+                }
             } else {
                 System.out.println("Operação cancelada.");
             }
@@ -51,4 +61,4 @@ public class Notificacao {
             System.out.println("Erro ao buscar dados: " + e.getMessage());
         }
     }
-}    
+}
